@@ -21,7 +21,5 @@ public class FoodPlannerActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeScreenFragment).commit();
 
         }
-
-
     }
 }

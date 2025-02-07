@@ -38,8 +38,7 @@ public class Loading_Home_Screen_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
+        
         view.postDelayed(() -> {
             homeScreenFragment = new Home_Screen_Fragment();
             requireActivity().getSupportFragmentManager().beginTransaction()
