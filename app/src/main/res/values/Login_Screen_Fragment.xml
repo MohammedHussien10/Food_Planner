@@ -2,4 +2,5 @@
 <resources>
     <string name="loginScreen">Login</string>
     <string name="login_btn">Login</string>
+
 </resources>
