@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import com.example.foodplanner.R;
 
 
-public class Home_Screen_Fragment extends Fragment {
+public class HomeScreenFragment extends Fragment {
 
 
-    public Home_Screen_Fragment() {
+    public HomeScreenFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -31,7 +32,7 @@ public class Home_Screen_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home__screen_, container, false);
+        return inflater.inflate(R.layout.fragment_home_screen, container, false);
     }
 
     @Override

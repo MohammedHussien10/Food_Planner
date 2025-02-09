@@ -15,7 +15,7 @@ import com.example.foodplanner.R;
 
 public class Loading_Home_Screen_Fragment extends Fragment {
 
-    Home_Screen_Fragment homeScreenFragment;
+    Welcome_Screen_Fragment welcomeScreenFragment;
 
     public Loading_Home_Screen_Fragment() {
         // Required empty public constructor
@@ -40,9 +40,9 @@ public class Loading_Home_Screen_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         
         view.postDelayed(() -> {
-            homeScreenFragment = new Home_Screen_Fragment();
+            welcomeScreenFragment = new Welcome_Screen_Fragment();
             requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, homeScreenFragment)
+                    .replace(R.id.fragmentContainer, welcomeScreenFragment)
                     .commit();
         }, 3000);
 
