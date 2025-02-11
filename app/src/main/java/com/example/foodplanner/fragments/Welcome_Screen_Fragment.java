@@ -1,4 +1,4 @@
-package com.example.foodplanner.Fragments;
+package com.example.foodplanner.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -16,11 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.foodplanner.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -104,13 +102,13 @@ public class Welcome_Screen_Fragment extends Fragment {
                     .replace(R.id.fragmentContainer, homeScreenFragment)
                     .commit();
             if (user != null) {
-                Toast.makeText(getContext(), "مرحبًا " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Welcome" + user.getDisplayName(), Toast.LENGTH_SHORT).show();
             }
         } else {
             if (response == null) {
-                Toast.makeText(getContext(), "تم إلغاء تسجيل الدخول!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "خطأ: " + response.getError().getErrorCode(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error" + response.getError().getErrorCode(), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -1,11 +1,11 @@
-package com.example.foodplanner.Activity;
+package com.example.foodplanner.activity;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodplanner.Fragments.Loading_Home_Screen_Fragment;
+import com.example.foodplanner.fragments.Loading_Home_Screen_Fragment;
 import com.example.foodplanner.R;
 
 public class FoodPlannerActivity extends AppCompatActivity {

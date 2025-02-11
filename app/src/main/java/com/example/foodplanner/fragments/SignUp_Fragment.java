@@ -1,4 +1,4 @@
-package com.example.foodplanner.Fragments;
+package com.example.foodplanner.fragments;
 
 import android.os.Bundle;
 
@@ -12,11 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.foodplanner.R;
 
+public class SignUp_Fragment extends Fragment {
 
-public class Login_Fragment extends Fragment {
 
-
-    public Login_Fragment() {
+    public SignUp_Fragment() {
         // Required empty public constructor
     }
 
@@ -31,7 +30,7 @@ public class Login_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login_, container, false);
+        return inflater.inflate(R.layout.fragment_sign_up_, container, false);
     }
 
     @Override
@@ -43,4 +42,6 @@ public class Login_Fragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+
+
 }
