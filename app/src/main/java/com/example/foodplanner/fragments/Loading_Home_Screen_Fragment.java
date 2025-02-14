@@ -44,7 +44,7 @@ public class Loading_Home_Screen_Fragment extends Fragment {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, welcomeScreenFragment)
                     .commit();
-        }, 3000);
+        }, 5000);
 
 
     }
