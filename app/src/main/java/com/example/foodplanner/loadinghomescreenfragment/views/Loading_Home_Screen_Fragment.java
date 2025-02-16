@@ -1,4 +1,4 @@
-package com.example.foodplanner.fragments;
+package com.example.foodplanner.loadinghomescreenfragment.views;
 
 import android.os.Bundle;
 
@@ -11,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodplanner.R;
+import com.example.foodplanner.databinding.FragmentLoadingHomeScreenBinding;
+import com.example.foodplanner.welcome_screen_fragment.views.Welcome_Screen_Fragment;
 
-public class SignUp_Fragment extends Fragment {
 
+public class Loading_Home_Screen_Fragment extends Fragment {
+    FragmentLoadingHomeScreenBinding binding;
 
-    public SignUp_Fragment() {
+    Welcome_Screen_Fragment welcomeScreenFragment;
+
+    public Loading_Home_Screen_Fragment() {
         // Required empty public constructor
     }
 
@@ -30,18 +35,27 @@ public class SignUp_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up_, container, false);
+        binding = FragmentLoadingHomeScreenBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.lottieAnimationView.playAnimation();
+        view.postDelayed(() -> {
+            welcomeScreenFragment = new Welcome_Screen_Fragment();
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, welcomeScreenFragment)
+                    .commit();
+        }, 5500);
+
+
     }
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
-
 }

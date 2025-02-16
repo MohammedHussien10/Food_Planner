@@ -1,9 +1,10 @@
-package com.example.foodplanner.adapters;
+package com.example.foodplanner.homescreenfragment.views;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,26 +19,27 @@ import com.example.foodplanner.models.Meals;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewMealHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
 
 private Context context;
 private List<Meals> mealsList;
+private HomeClickListener homeClickListener;
 
-    public RecyclerViewAdapter(Context context, List<Meals> mealsList) {
+    public HomeAdapter(Context context, List<Meals> mealsList) {
         this.context = context;
         this.mealsList = mealsList;
     }
 
     @NonNull
     @Override
-    public MyViewMealHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.randommeals,parent,false);
-        MyViewMealHolder myViewMealHolder = new MyViewMealHolder(view);
-        return myViewMealHolder;
+        HomeHolder homeHolder = new HomeHolder(view);
+        return homeHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewMealHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeHolder holder, int position) {
         Meals meals = mealsList.get(position);
         holder.name.setText(meals.getName());
         holder.category.setText(meals.getCategory());
@@ -47,10 +49,10 @@ private List<Meals> mealsList;
         holder.Measure.setText(meals.getMeasure());
         Glide.with(context).load(meals.getMealImage()).into(holder.mealImage);
 
-        holder.convertView.setOnClickListener(new View.OnClickListener() {
+        holder.btn_Guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, meals.getName(), Toast.LENGTH_SHORT).show();
+                homeClickListener.addMealToHomeAdapter(meals);
             }
         });
     }
@@ -62,13 +64,16 @@ private List<Meals> mealsList;
     }
 
 
-    public class MyViewMealHolder extends RecyclerView.ViewHolder{
+    public class HomeHolder extends RecyclerView.ViewHolder{
 
-        ConstraintLayout convertView;
-        public TextView name,category,area,instructions,ingredient,Measure;
-        public ImageView mealImage;
+         ConstraintLayout convertView;
+         TextView name,category,area,instructions,ingredient,Measure;
+         ImageView mealImage;
+         Button btn_Guest;
 
-        public MyViewMealHolder(@NonNull View view){
+
+
+        public HomeHolder(@NonNull View view){
             super(view);
             convertView = (ConstraintLayout) view;
             name = view.findViewById(R.id.name_Meal);
@@ -78,6 +83,7 @@ private List<Meals> mealsList;
             ingredient = view.findViewById(R.id.ingredient_Meal);
             Measure = view.findViewById(R.id.measure_Meal);
             mealImage = view.findViewById(R.id.imageView_Meal);
+            btn_Guest = view.findViewById(R.id.btn_Guest);
 
         }
 

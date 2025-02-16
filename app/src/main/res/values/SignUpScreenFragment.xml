@@ -3,5 +3,6 @@
     <string name="signupscreen">Sign Up</string>
     <string name="signupscreenbtn">Sign Up</string>
     <string name="hintyourname">Your Name</string>
+    <string name="Welcome_P_Signup">Welcome</string>
 
 </resources>

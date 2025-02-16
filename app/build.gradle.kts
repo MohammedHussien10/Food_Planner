@@ -30,7 +30,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-   // buildFeatures {    viewBinding = true}
+   buildFeatures {    viewBinding = true}
 }
 
 dependencies {
@@ -39,14 +39,26 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.auth)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //firebase
+    implementation(libs.firebase.auth)
     implementation (libs.firebase.ui.auth)
    // implementation(libs.play.services.auth)
+    //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0");
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0");
+    //glide
     implementation ("com.github.bumptech.glide:glide:4.16.0");
+    //lottie
+    implementation ("com.airbnb.android:lottie:6.6.2")
+    //navigation
+    implementation ("androidx.navigation:navigation-fragment:2.5.3")
+    implementation ("androidx.navigation:navigation-ui:2.5.3")
+    //material design
+    implementation ("com.google.android.material:material:1.11.0")
+
 
 }

@@ -2,5 +2,9 @@
 <resources>
     <string name="loginScreen">Login</string>
     <string name="login_btn">Login</string>
+    <string name="WelcomeBack">Welcome Back!</string>
+    <string name="ForgetPassword">Forget Password ?</string>
+    <string name="login_P_SignUp">Sign Up</string>
+    <string name="DontHaveanAccount">Don\'t Have an Account ?</string>
 
 </resources>
