@@ -48,17 +48,27 @@ dependencies {
     implementation (libs.firebase.ui.auth)
    // implementation(libs.play.services.auth)
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.11.0");
-    implementation ("com.squareup.retrofit2:converter-gson:2.11.0");
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
     //glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0");
+    implementation (libs.glide)
     //lottie
-    implementation ("com.airbnb.android:lottie:6.6.2")
+    implementation (libs.lottie)
     //navigation
-    implementation ("androidx.navigation:navigation-fragment:2.5.3")
-    implementation ("androidx.navigation:navigation-ui:2.5.3")
+    implementation (libs.navigation.fragment)
+    implementation (libs.navigation.ui)
     //material design
-    implementation ("com.google.android.material:material:1.11.0")
+    implementation (libs.material.v1110)
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
+    //RX
+    implementation (libs.rxandroid)
+    implementation (libs.rxjava)
+    implementation (libs.rxjava3.retrofit.adapter)
+    implementation("androidx.room:room-rxjava3:2.6.1")
 
 
 }
