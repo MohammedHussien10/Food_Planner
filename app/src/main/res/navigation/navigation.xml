@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/welcome_Screen_Fragment">
+
+    <fragment
+        android:id="@+id/welcome_Screen_Fragment"
+        android:name="com.example.foodplanner.welcome_screen_fragment.views.Welcome_Screen_Fragment"
+        android:label="welcome_screen_fragment"
+        tools:layout="@layout/welcome_screen_fragment" >
+        <action
+            android:id="@+id/action_welcome_Screen_Fragment_to_login_Fragment"
+            app:destination="@id/login_Fragment" />
+        <action
+            android:id="@+id/action_welcome_Screen_Fragment_to_signUp_Fragment"
+            app:destination="@id/signUp_Fragment" />
+        <action
+            android:id="@+id/action_welcome_Screen_Fragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/login_Fragment"
+        android:name="com.example.foodplanner.loginfragment.views.Login_Fragment"
+        android:label="fragment_login_"
+        tools:layout="@layout/fragment_login_" >
+        <action
+            android:id="@+id/action_login_Fragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp_Fragment"
+        android:name="com.example.foodplanner.signupfragment.views.SignUp_Fragment"
+        android:label="fragment_sign_up_"
+        tools:layout="@layout/fragment_sign_up_" />
+    <fragment
+        android:id="@+id/loading_Home_Screen_Fragment"
+        android:name="com.example.foodplanner.loadinghomescreenfragment.views.Loading_Home_Screen_Fragment"
+        android:label="fragment_loading__home__screen_"
+        tools:layout="@layout/fragment_loading__home__screen_" />
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.example.foodplanner.homescreenfragment.views.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen" />
+</navigation>
