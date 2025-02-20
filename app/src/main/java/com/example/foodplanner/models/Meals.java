@@ -1,35 +1,48 @@
 package com.example.foodplanner.models;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+@Entity(tableName = "randomMealsTable")
 public class Meals {
     @SerializedName("idMeal")
+    @PrimaryKey
+    @NonNull
     private String id;
 
     @SerializedName("strMeal")
+    @ColumnInfo(name= "name")
     private String name;
 
     @SerializedName("strCategory")
+    @ColumnInfo(name= "category")
     private String category;
 
     @SerializedName("strArea")
+    @ColumnInfo(name= "area")
     private String area;
 
     @SerializedName("strInstructions")
+    @ColumnInfo(name= "instructions")
     private String instructions;
 
     @SerializedName("strMealThumb")
+    @ColumnInfo(name= "mealImage")
     private String mealImage;
 
     @SerializedName("strIngredient1")
+    @ColumnInfo(name= "ingredient")
     private String ingredient;
 
     @SerializedName("strMeasure1")
+    @ColumnInfo(name= "measure")
     private String measure;
 
 
-
-    public Meals(String id, String name, String category, String area, String instructions, String mealImage, String ingredient, String measure) {
+    public Meals(@NonNull String id, String name, String category, String area, String instructions, String mealImage, String ingredient, String measure) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -39,8 +52,6 @@ public class Meals {
         this.ingredient = ingredient;
         this.measure = measure;
     }
-
-
 
     public String getId() {
         return id;
@@ -104,6 +115,20 @@ public class Meals {
 
     public void setMeasure(String measure) {
         this.measure = measure;
+    }
+
+    @Override
+    public String toString() {
+        return "Meals{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", area='" + area + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", mealImage='" + mealImage + '\'' +
+                ", ingredient='" + ingredient + '\'' +
+                ", measure='" + measure + '\'' +
+                '}';
     }
 
 }

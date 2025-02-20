@@ -1,6 +1,7 @@
 package com.example.foodplanner.homescreenfragment.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
@@ -25,17 +27,18 @@ private Context context;
 private List<Meals> mealsList;
 private HomeClickListener homeClickListener;
 
-    public HomeAdapter(Context context, List<Meals> mealsList) {
+    public HomeAdapter(Context context, List<Meals> mealsList,HomeClickListener homeClickListener) {
         this.context = context;
-        this.mealsList = mealsList;
+        this.mealsList = new ArrayList<>(mealsList);
+        this.homeClickListener = homeClickListener;
     }
 
     @NonNull
     @Override
     public HomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.randommeals,parent,false);
-        HomeHolder homeHolder = new HomeHolder(view);
-        return homeHolder;
+        LayoutInflater inflater  = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.randommeals,parent,false);
+        return new HomeHolder(view);
     }
 
     @Override
@@ -49,12 +52,12 @@ private HomeClickListener homeClickListener;
         holder.Measure.setText(meals.getMeasure());
         Glide.with(context).load(meals.getMealImage()).into(holder.mealImage);
 
-        holder.btn_Guest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                homeClickListener.addMealToHomeAdapter(meals);
-            }
-        });
+//        holder.btn_Guest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                homeClickListener.addMealToHomeAdapter(meals);
+//            }
+//        });
     }
 
 
@@ -84,11 +87,9 @@ private HomeClickListener homeClickListener;
             Measure = view.findViewById(R.id.measure_Meal);
             mealImage = view.findViewById(R.id.imageView_Meal);
             btn_Guest = view.findViewById(R.id.btn_Guest);
-
-        }
-
-
-
-
+            if (btn_Guest == null) {
+                Log.i("HomeAdapter", "btn_Guest is NULL! Check XML file.");
+          }
     }
+}
 }
