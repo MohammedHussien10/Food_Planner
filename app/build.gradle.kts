@@ -59,6 +59,7 @@ dependencies {
     implementation (libs.navigation.ui)
     //material design
     implementation (libs.material.v1110)
+    implementation ("com.google.android.material:material:1.9.0")
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
