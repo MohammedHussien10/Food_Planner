@@ -30,7 +30,7 @@ public class Login_Fragment extends Fragment implements LoginContract {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenter(this,requireContext());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.foodplanner.models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.foodplanner.db.MealsDao;
 import com.example.foodplanner.db.MealsLocalDataSource;
@@ -31,7 +32,12 @@ public class MealsRepository {
         }
         return repository;
     }
-    public Single<MealsResponse> getAllRandomMeals(){
+    public Single<Meals> getDailyMeals(){
+        return mealsRemoteDataSource.getDailyMeals();
+
+    }
+
+    public Single<MealsResponse> getRandomMeals(){
         return mealsRemoteDataSource.getRandomMeals();
     }
 

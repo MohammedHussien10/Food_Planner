@@ -1,6 +1,7 @@
 package com.example.foodplanner.network;
 
 import com.example.foodplanner.homescreenfragment.presenter.HomeContract;
+import com.example.foodplanner.models.CategoriesResponse;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsResponse;
 
@@ -41,15 +42,27 @@ public class MealsRemoteDataSource {
         return remoteSource;
     }
 
-   public Single<MealsResponse> getRandomMeals(){
+
+    public Single<Meals> getDailyMeals() {
+        return service.getDailyMeals()
+                .map(response -> {
+                    if (response != null && response.getMeals() != null && !response.getMeals().isEmpty()) {
+                        return response.getMeals().get(0);
+                    } else {
+                        throw new NullPointerException("API response is null or empty");
+                    }
+                });
+    }
+    public Single<MealsResponse> getRandomMeals(){
+
         return service.getRandomMeals();
-   }
+    }
 
 }
 
 //public void getRandomMeal(HomeContract homeContract){
 //    MealsService mealsService = MealsRemoteDataSource.getRetrofitConnection().create(MealsService.class);
-//    Call<MealsResponse> call = mealsService.getRandomMeals();
+//    Call<MealsResponse> call = mealsService.showDailyMeals();
 //    call.enqueue(new Callback<MealsResponse>() {
 //        @Override
 //        public void onResponse(Call<MealsResponse> call, Response<MealsResponse> response) {

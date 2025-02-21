@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
+import com.example.foodplanner.models.MealsResponse;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -23,27 +24,62 @@ public class HomePresenter {
     }
 
 
-    public void getRandomMeals() {
-        repository.getAllRandomMeals()
-                .subscribeOn(Schedulers.io())  // تشغيل العملية في Background Thread
-                .observeOn(AndroidSchedulers.mainThread())  // 🔴 تحويل التحديثات إلى Main Thread
-                .subscribe(mealsResponse -> {
-
-                    homeContract.assignAdapter(mealsResponse.getMeals());  // ✅ تحديث RecyclerView في Main Thread
-
+    public void showDailyMeals() {
+        repository.getDailyMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(meal -> {
+                    if (meal != null) {
+                        homeContract.showDailyMeals(meal);
+                    } else {
+                        homeContract.showToast("Meal data is empty");
+                    }
                 }, throwable -> {
-                    Log.e("Error", throwable.getMessage());
+                    homeContract.showToast("Error fetching meal: " + throwable.getMessage());
                 });
     }
 
-    public void addProductToFavorites(Meals meal) {
-        Meals entry = new Meals(
-                meal.getId(),
-                meal.getName(),
-                meal.getCategory(),
-                meal.getArea(),
-                meal.getInstructions(),
-                meal.getIngredient(), meal.getMeasure(), meal.getMealImage()
-        );
+    public void getRandomMeals() {
+        repository.getRandomMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(meal -> {
+                    if (meal != null) {
+                        meal.getMeals().remove(0);
+                        homeContract.assignRandomMealsAdapter(meal.getMeals());
+                    } else {
+                        homeContract.showToast("Meal data is empty");
+                    }
+                }, throwable -> {
+                    homeContract.showToast("Error fetching meal: " + throwable.getMessage());
+                });
     }
+
+
+
+
+
+//    public void get_Categories() {
+//        repository.getCategories()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(categoriesResponse -> {
+//
+//                    homeContract.assignCategoriesAdapter(categoriesResponse.getCategories());
+//
+//                }, throwable -> {
+//                    Log.e("Error", throwable.getMessage());
+//                });
+//    }
+
+//    public void addProductToFavorites(Meals meal) {
+//        Meals entry = new Meals(
+//                meal.getId(),
+//                meal.getName(),
+//                meal.getCategory(),
+//                meal.getArea(),
+//                meal.getInstructions(),
+//                meal.getIngredient(), meal.getMeasure(), meal.getMealImage()
+//        );
+//    }
 }

@@ -8,37 +8,30 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.foodplanner.databinding.FragmentHomeScreenBinding;
 import com.example.foodplanner.db.MealsLocalDataSource;
 import com.example.foodplanner.homescreenfragment.presenter.HomeContract;
 import com.example.foodplanner.homescreenfragment.presenter.HomePresenter;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
-import com.example.foodplanner.models.MealsResponse;
 import com.example.foodplanner.R;
-import com.example.foodplanner.network.MealsService;
 import com.example.foodplanner.network.MealsRemoteDataSource;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class HomeScreenFragment extends Fragment implements HomeClickListener, HomeContract {
 FragmentHomeScreenBinding binding;
-HomeAdapter homeAdapter;
+HomeRandomMealsAdapter homeRandomMealsAdapter;
 RecyclerView recyclerV_Meals;
 HomePresenter homePresenter;
+Meals meal;
 
     public HomeScreenFragment() {
         // Required empty public constructor
@@ -66,18 +59,18 @@ HomePresenter homePresenter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         recyclerV_Meals = view.findViewById(R.id.recyclerV_Meal);
 
-
+        homeRandomMealsAdapter = new HomeRandomMealsAdapter(getContext(),this);
+        recyclerV_Meals.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recyclerV_Meals.setAdapter(homeRandomMealsAdapter);
+        homePresenter.showDailyMeals();
         homePresenter.getRandomMeals();
 //        getRandomMeal();
 
-//        binding.signout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                signOut();
-//            }
-//        });
+
+
 
     }
 
@@ -91,10 +84,17 @@ HomePresenter homePresenter;
 
 
     @Override
-    public void assignAdapter(List<Meals> mealsList) {
-        recyclerV_Meals.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        homeAdapter = new HomeAdapter(getContext(),mealsList,this);
-        recyclerV_Meals.setAdapter(homeAdapter);
+    public void assignRandomMealsAdapter(List<Meals> mealsList) {
+        homeRandomMealsAdapter.setMealsList(mealsList);
+        homeRandomMealsAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void showDailyMeals(Meals meal) {
+        Glide.with(this).load(meal.getMealImage()).into(binding.mealDailyImage);
+        binding.mealDailyName.setText(meal.getName());
+        binding.mealDailyArea.setText(meal.getArea());
     }
 
     @Override

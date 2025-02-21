@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="homepage">Home Page</string>
+    <string name="Suggested_daily_meal">Suggested Daily Meal :</string>
+    <string name="suggested_meals">Would You Like to Choose From The Suggested Meals?</string>
 </resources>
