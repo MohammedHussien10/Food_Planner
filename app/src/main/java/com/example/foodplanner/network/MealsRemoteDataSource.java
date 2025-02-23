@@ -1,9 +1,13 @@
 package com.example.foodplanner.network;
 
+import android.util.Log;
+
 import com.example.foodplanner.homescreenfragment.presenter.HomeContract;
 import com.example.foodplanner.models.CategoriesResponse;
+import com.example.foodplanner.models.IngredientsResponse;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsResponse;
+import com.example.foodplanner.models.RemoteMeals;
 
 import java.util.List;
 
@@ -43,7 +47,7 @@ public class MealsRemoteDataSource {
     }
 
 
-    public Single<Meals> getDailyMeals() {
+    public Single<RemoteMeals> getDailyMeals() {
         return service.getDailyMeals()
                 .map(response -> {
                     if (response != null && response.getMeals() != null && !response.getMeals().isEmpty()) {
@@ -58,27 +62,22 @@ public class MealsRemoteDataSource {
         return service.getRandomMeals();
     }
 
+    public Single<MealsResponse> getSelectedMeal(String mealId){
+
+        return service.getSelectedMeal(mealId);
+    }
+
+    public Single<CategoriesResponse> getCategory(){
+
+        return service.getCategory();
+    }
+
+    //getIngredientSearch screen
+
+    public Single<IngredientsResponse> getIngredient(){
+
+        return service.getIngredient();
+    }
+
 }
 
-//public void getRandomMeal(HomeContract homeContract){
-//    MealsService mealsService = MealsRemoteDataSource.getRetrofitConnection().create(MealsService.class);
-//    Call<MealsResponse> call = mealsService.showDailyMeals();
-//    call.enqueue(new Callback<MealsResponse>() {
-//        @Override
-//        public void onResponse(Call<MealsResponse> call, Response<MealsResponse> response) {
-//            if(response.isSuccessful() && response.body() != null){
-//                listOfMeals.addAll(response.body().getMeals());
-//                homeContract.assignAdapter(listOfMeals);
-//
-//            }else {
-//                homeContract.showToast(response.errorBody().toString());
-//            }
-//        }
-//
-//        @Override
-//        public void onFailure(Call<MealsResponse> call, Throwable throwable) {
-//            throwable.printStackTrace();
-//
-//        }
-//    });
-//}

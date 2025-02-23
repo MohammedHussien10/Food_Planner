@@ -1,6 +1,7 @@
 package com.example.foodplanner.network;
 
 import com.example.foodplanner.models.CategoriesResponse;
+import com.example.foodplanner.models.IngredientsResponse;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsResponse;
 
@@ -21,8 +22,14 @@ public interface MealsService {
     @GET("categories.php")
     Single<CategoriesResponse> getCategory();
 
-    @GET("search.php")
-    Single<MealsResponse> getRandomMeals(@Query("i") String id);
+    //getIngredientSearchScreen
+    @GET("list.php?i=list")
+    Single<IngredientsResponse> getIngredient();
+
+    @GET("lookup.php")
+    Single<MealsResponse> getSelectedMeal(@Query("i") String mealId);
+
+
 
 
 }

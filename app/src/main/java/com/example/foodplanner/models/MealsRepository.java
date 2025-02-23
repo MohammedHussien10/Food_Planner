@@ -32,13 +32,28 @@ public class MealsRepository {
         }
         return repository;
     }
-    public Single<Meals> getDailyMeals(){
+    public Single<RemoteMeals> getDailyMeals(){
         return mealsRemoteDataSource.getDailyMeals();
 
     }
 
     public Single<MealsResponse> getRandomMeals(){
         return mealsRemoteDataSource.getRandomMeals();
+    }
+
+    public Single<MealsResponse> getSelectedMeal(String mealId){
+
+        return mealsRemoteDataSource.getSelectedMeal(mealId);
+    }
+
+    public Single<CategoriesResponse> getCategory(){
+
+        return mealsRemoteDataSource.getCategory();
+    }
+    //getIngredientSearch screen
+    public Single<IngredientsResponse> getIngredient(){
+
+        return mealsRemoteDataSource.getIngredient();
     }
 
 
