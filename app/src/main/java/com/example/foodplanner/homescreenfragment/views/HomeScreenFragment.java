@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.foodplanner.homescreenfragment.presenter.HomePresenter;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
 import com.example.foodplanner.R;
+import com.example.foodplanner.models.RemoteMeals;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
@@ -84,14 +86,14 @@ Meals meal;
 
 
     @Override
-    public void assignRandomMealsAdapter(List<Meals> mealsList) {
+    public void assignRandomMealsAdapter(List<RemoteMeals> mealsList) {
         homeRandomMealsAdapter.setMealsList(mealsList);
         homeRandomMealsAdapter.notifyDataSetChanged();
 
     }
 
     @Override
-    public void showDailyMeals(Meals meal) {
+    public void showDailyMeals(RemoteMeals meal) {
         Glide.with(this).load(meal.getMealImage()).into(binding.mealDailyImage);
         binding.mealDailyName.setText(meal.getName());
         binding.mealDailyArea.setText(meal.getArea());
@@ -106,6 +108,14 @@ Meals meal;
     public void addMealToHomeAdapter(Meals meal) {
        // homePresenter.addProductToFavorites(meal);
         showToast("The Day of The Meal");
+    }
+
+    @Override
+    public void navigateToDetails(String mealId) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("mealId", mealId);
+        Navigation.findNavController(requireView()).navigate(R.id.action_homeScreenFragment_to_detailsScreenFragment, bundle);
     }
 
 

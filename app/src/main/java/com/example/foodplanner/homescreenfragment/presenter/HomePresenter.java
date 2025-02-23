@@ -12,7 +12,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomePresenter {
     HomeContract homeContract;
-    MealsRemoteDataSource mealsRemoteDataSource;
     MealsRepository repository;
 
 
