@@ -43,5 +43,21 @@
         android:id="@+id/homeScreenFragment"
         android:name="com.example.foodplanner.homescreenfragment.views.HomeScreenFragment"
         android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" />
+        tools:layout="@layout/fragment_home_screen" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_detailsScreenFragment"
+            app:destination="@id/detailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsScreenFragment"
+        android:name="com.example.foodplanner.DetailsFragment.views.DetailsScreenFragment"
+        android:label="DetailsScreenFragment" >
+        <argument
+            android:name="MealId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchSelectbyScreenFragment"
+        android:name="com.example.foodplanner.SearchSelectbyFragment.views.SearchSelectbyScreenFragment"
+        android:label="SearchSelectbyScreenFragment" />
 </navigation>

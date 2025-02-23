@@ -5,4 +5,8 @@
     <string name="homescreen">Get Started</string>
     <string name="loadingscreen">Loading Screen</string>
     <string name="Signup_p_Signup">Sign up</string>
+    <string name="instructions">Instructions :</string>
+    <string name="Ingredient_chip">Ingredient</string>
+    <string name="Country_chip">Country</string>
+
 </resources>
