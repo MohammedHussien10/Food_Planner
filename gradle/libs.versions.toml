@@ -1,30 +1,53 @@
 [versions]
 agp = "8.8.0"
+converterGson = "2.11.0"
 firebaseUiAuth = "7.2.0"
+glide = "4.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+lottie = "6.6.2"
 material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.2.0"
+materialVersion = "1.11.0"
+navigationFragment = "2.8.7"
 playServicesAuth = "21.3.0"
 playServicesAuthVersion = "20.6.0"
+room_runtime = "2.4.1"
+roomRxjava3 = "2.6.1"
+rxandroid = "3.0.2"
+rxjava = "3.1.6"
+rxjava3RetrofitAdapter = "3.0.0"
 
 [libraries]
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 firebase-ui-auth = { module = "com.firebaseui:firebase-ui-auth", version.ref = "firebaseUiAuth" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "navigationFragment" }
+navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-auth-v2060 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
+room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomRxjava3" }
+room_compiler = { module = "androidx.room:room compiler", version.ref = "room_runtime" }
+room_runtime = { module = "androidx.room:room runtime", version.ref = "room_runtime" }
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+rxjava3-retrofit-adapter = { module = "com.github.akarnokd:rxjava3-retrofit-adapter", version.ref = "rxjava3RetrofitAdapter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

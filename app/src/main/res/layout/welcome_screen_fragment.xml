@@ -4,84 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Welcome_Screen_Fragment">
+    android:background="#EFE3D2"
+    tools:context=".welcome_screen_fragment.views.Welcome_Screen_Fragment">
 
-    <Button
-        android:id="@+id/btn_Twitter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/twitter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_screen" />
-
-    <Button
-        android:id="@+id/btn_Facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/facebook"
-        app:layout_constraintEnd_toStartOf="@+id/btn_Twitter"
-        app:layout_constraintStart_toEndOf="@+id/btn_Google"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_screen" />
 
     <TextView
         android:id="@+id/tv_home_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/adlam_display"
         android:text="@string/homescreen"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/btn_Guest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/gmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="280dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/adlam_display"
+        android:gravity="center"
+        android:text="@string/description"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_screen" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="282dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="72dp"
+        android:background="#F3EBD2"
+        android:src="@drawable/welcomescreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_Google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/google"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_screen" />
+        android:id="@+id/btn_Welcome_SignUp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_background_welcome"
+        android:text="@string/twitter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnWelcomeLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Guest" />
 
     <Button
-        android:id="@+id/btn_Gmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/gmail"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnWelcomeLogin"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_background_welcome_2"
+        android:text="@string/Login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Facebook" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="96dp"
-        android:text="@string/already_have_an_account"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Gmail" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Guest" />
 
     <Button
-        android:id="@+id/btn_Welcome_Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="72dp"
-        android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Gmail" />
+        android:id="@+id/btn_google_Signin"
+        android:layout_width="211dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:drawableLeft="@drawable/google_icon"
+        android:drawablePadding="12dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Login with Google"
+        android:textColor="#497D9D"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Welcome_SignUp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnWelcomeLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Welcome_SignUp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/sign_up"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_home_screen" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,60 +4,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Login_Fragment">
+    android:background="#EFE3D2"
+    tools:context=".loginfragment.views.Login_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <EditText
-        android:id="@+id/et_Screen_Login_Email"
+    <Button
+        android:id="@+id/btn_Welcome_Login2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:background="#F4EDF5FF"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/login_P_SignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Screen_Login" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Screen_Login" />
 
-    <EditText
-        android:id="@+id/et_Screen_Login_Password"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:background="#F4EDF5FF"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="84dp"
+        android:text="@string/DontHaveanAccount"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Screen_Login_Email" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Screen_Login"
+        app:layout_constraintVertical_bias="0.804" />
 
     <TextView
         android:id="@+id/tv_Screen_Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/loginScreen"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/adlam_display"
+        android:text="@string/WelcomeBack"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_Screen_Login"
+        android:layout_width="285dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/button_background_login_signup"
+        android:text="@string/login_btn"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/login_btn"
+        android:layout_marginTop="36dp"
+        android:text="@string/ForgetPassword"
+        android:textColor="#FF7043"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="317dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="132dp"
+        android:hint="Username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Screen_Login_Password" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Screen_Login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Screen_Signup_Yourname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="317dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="52dp"
+        android:hint="Password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Screen_Login_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
