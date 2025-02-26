@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ import com.example.foodplanner.models.MealsRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.RemoteMeals;
 import com.example.foodplanner.network.MealsRemoteDataSource;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +36,8 @@ FragmentHomeScreenBinding binding;
 HomeRandomMealsAdapter homeRandomMealsAdapter;
 RecyclerView recyclerV_Meals;
 HomePresenter homePresenter;
-Meals meal;
-
+CardView cardViewRandom;
+    FirebaseUser user;
     public HomeScreenFragment() {
         // Required empty public constructor
     }
@@ -61,7 +64,17 @@ Meals meal;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (user != null) {
+            String email = user.getEmail();
+            showToast("Welcome " + email);
+        } else {
+            showToast("Guest Mode");
+        }
+
+
+        cardViewRandom =view.findViewById(R.id.cardViewRandom);
         recyclerV_Meals = view.findViewById(R.id.recyclerV_Meal);
 
         homeRandomMealsAdapter = new HomeRandomMealsAdapter(getContext(),this);
@@ -69,9 +82,20 @@ Meals meal;
         recyclerV_Meals.setAdapter(homeRandomMealsAdapter);
         homePresenter.showDailyMeals();
         homePresenter.getRandomMeals();
-//        getRandomMeal();
 
 
+
+        cardViewRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (homePresenter.getDailyRandomMeal() != null) {
+                    String mealId = homePresenter.getDailyRandomMeal().getId();
+                    navigateToDetails(mealId);
+                } else {
+                    showToast("No random meal available");
+                }
+            }
+        });
 
 
     }
@@ -117,6 +141,8 @@ Meals meal;
         bundle.putString("mealId", mealId);
         Navigation.findNavController(requireView()).navigate(R.id.action_homeScreenFragment_to_detailsScreenFragment, bundle);
     }
+
+
 
 
 }

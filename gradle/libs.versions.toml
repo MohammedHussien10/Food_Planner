@@ -15,6 +15,7 @@ googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.2.0"
 materialVersion = "1.11.0"
 navigationFragment = "2.8.7"
+player = "1.2.2"
 playServicesAuth = "21.3.0"
 playServicesAuthVersion = "20.6.0"
 room_runtime = "2.4.1"
@@ -22,6 +23,7 @@ roomRxjava3 = "2.6.1"
 rxandroid = "3.0.2"
 rxjava = "3.1.6"
 rxjava3RetrofitAdapter = "3.0.0"
+googlePlayServicesAuth = "19.0.0"
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
@@ -41,6 +43,7 @@ navigation-fragment = { module = "androidx.navigation:navigation-fragment", vers
 navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "navigationFragment" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-auth-v2060 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
+player = { module = "com.google.android.youtube:player", version.ref = "player" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
 room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomRxjava3" }
 room_compiler = { module = "androidx.room:room compiler", version.ref = "room_runtime" }
@@ -48,6 +51,7 @@ room_runtime = { module = "androidx.room:room runtime", version.ref = "room_runt
 rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
 rxjava3-retrofit-adapter = { module = "com.github.akarnokd:rxjava3-retrofit-adapter", version.ref = "rxjava3RetrofitAdapter" }
+gms-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "googlePlayServicesAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

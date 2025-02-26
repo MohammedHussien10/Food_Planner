@@ -8,5 +8,8 @@
     <string name="instructions">Instructions :</string>
     <string name="Ingredient_chip">Ingredient</string>
     <string name="Country_chip">Country</string>
+    <string name="nameFavouriteMeal">nameFavouriteMeal</string>
+    <string name="Calendar">Your Week Plan :</string>
+    <string name="Favourites">Favourites</string>
 
 </resources>

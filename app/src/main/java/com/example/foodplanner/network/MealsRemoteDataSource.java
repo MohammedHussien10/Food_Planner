@@ -3,6 +3,7 @@ package com.example.foodplanner.network;
 import android.util.Log;
 
 import com.example.foodplanner.homescreenfragment.presenter.HomeContract;
+import com.example.foodplanner.models.AreaResponse;
 import com.example.foodplanner.models.CategoriesResponse;
 import com.example.foodplanner.models.IngredientsResponse;
 import com.example.foodplanner.models.Meals;
@@ -77,6 +78,27 @@ public class MealsRemoteDataSource {
     public Single<IngredientsResponse> getIngredient(){
 
         return service.getIngredient();
+    }
+
+    //getArea
+    public Single<AreaResponse> getArea(){
+
+        return service.getArea();
+    }
+
+    public Single<MealsResponse> getSelectedCategories(String categoryName ){
+
+        return service.getSelectedCategories(categoryName);
+    }
+
+    public Single<MealsResponse> getSelectedArea(String areaName){
+
+        return service.getSelectedArea(areaName);
+    }
+
+    public Single<MealsResponse> getSelectedIngredient(String ingredientName){
+
+        return service.getSelectedIngredient(ingredientName);
     }
 
 }

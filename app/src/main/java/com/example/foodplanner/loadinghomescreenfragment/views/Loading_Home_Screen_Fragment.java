@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +45,8 @@ public class Loading_Home_Screen_Fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.lottieAnimationView.playAnimation();
         view.postDelayed(() -> {
-            welcomeScreenFragment = new Welcome_Screen_Fragment();
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, welcomeScreenFragment)
-                    .commit();
+
+            Navigation.findNavController(view).navigate(R.id.action_loading_Home_Screen_Fragment_to_welcome_Screen_Fragment);
         }, 5500);
 
 

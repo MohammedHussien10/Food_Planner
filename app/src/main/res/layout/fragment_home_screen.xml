@@ -26,13 +26,13 @@
             android:text="@string/Suggested_daily_meal"
             android:textColor="#FF7043"
             android:textSize="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            app:layout_constraintBottom_toTopOf="@+id/cardViewRandom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardView"
+            android:id="@+id/cardViewRandom"
             android:layout_width="match_parent"
             android:layout_height="288dp"
             android:layout_marginStart="8dp"
@@ -92,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
+            app:layout_constraintTop_toBottomOf="@+id/cardViewRandom">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerV_Meal"
@@ -117,7 +117,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewRandom"
             app:layout_constraintVertical_bias="0.553" />
 
 
