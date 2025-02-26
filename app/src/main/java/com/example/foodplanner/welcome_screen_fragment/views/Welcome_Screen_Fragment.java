@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,10 +19,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.foodplanner.R;
 import com.example.foodplanner.databinding.WelcomeScreenFragmentBinding;
+import com.example.foodplanner.signupfragment.presenter.SignUpPresenter;
+import com.example.foodplanner.welcome_screen_fragment.presenter.WelcomeContract;
+import com.example.foodplanner.welcome_screen_fragment.presenter.WelcomePresenter;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,15 +41,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.foodplanner.homescreenfragment.views.HomeScreenFragment;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 
-public class Welcome_Screen_Fragment extends Fragment {
-    private FirebaseAuth mAuth; //firebase ref
-WelcomeScreenFragmentBinding binding;
-HomeScreenFragment homeScreenFragment;
-
-    private ActivityResultLauncher<Intent> signInLauncher;
-
+public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract {
+     FirebaseAuth mAuth;
+    WelcomeScreenFragmentBinding binding;
+     GoogleSignInClient googleSignInClient;
+     ActivityResultLauncher<Intent> googleSignInLauncher;
+     WelcomePresenter welcomePresenter;
 
 
     public Welcome_Screen_Fragment() {
@@ -48,14 +60,14 @@ HomeScreenFragment homeScreenFragment;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        welcomePresenter = new WelcomePresenter(this,requireContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding =  WelcomeScreenFragmentBinding.inflate(inflater, container, false);
+        binding = WelcomeScreenFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -63,10 +75,35 @@ HomeScreenFragment homeScreenFragment;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         NavController navController = Navigation.findNavController(view);
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        onStart();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("715026430091-ue656i1cfrnqmjcsefldkn3140ncnpos.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso);
+
+        googleSignInLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == AppCompatActivity.RESULT_OK && result.getData() != null) {
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                        try {
+                            GoogleSignInAccount account = task.getResult(ApiException.class);
+                            if (account != null) {
+                                String idToken = account.getIdToken();
+                                welcomePresenter.firebaseAuthWithGoogle(idToken);
+                            }
+                        } catch (ApiException e) {
+                            Toast.makeText(getContext(), "Google Sign-In Failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+
 
 
         binding.btnWelcomeLogin.setOnClickListener(v ->
@@ -88,18 +125,7 @@ HomeScreenFragment homeScreenFragment;
         });
 
 
-
-        signInLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                this::onSignInResult
-        );
-
-        binding.btnGoogleSignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
+        binding.btnGoogleSignin.setOnClickListener(v -> signInWithGoogle());
 
 
     }
@@ -109,58 +135,16 @@ HomeScreenFragment homeScreenFragment;
         super.onSaveInstanceState(outState);
     }
 
-    public void signIn() {
-
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
-             new AuthUI.IdpConfig.EmailBuilder().build(),
-              new AuthUI.IdpConfig.GoogleBuilder().build()
-        );
 
 
-        Intent signInIntent = AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build();
-        signInLauncher.launch(signInIntent);
+    private void signInWithGoogle() {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        googleSignInLauncher.launch(signInIntent);
     }
 
-    private void onSignInResult(androidx.activity.result.ActivityResult result) {
-        IdpResponse response = IdpResponse.fromResultIntent(result.getData());
-        if (result.getResultCode() == RESULT_OK) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            homeScreenFragment = new HomeScreenFragment();
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, homeScreenFragment)
-                    .commit();
-            if (user != null) {
-                Toast.makeText(getContext(), "Welcome" + user.getDisplayName(), Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            if (response == null) {
-                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "Error" + response.getError().getErrorCode(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void signOut() {
-        // [START auth_sign_out]
-        Log.i("test","calling sign out");
-        FirebaseAuth.getInstance().signOut();
-        // [END auth_sign_out]
-    }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload();
-
-        }
-        Log.i("test","calling onStart");
+    public void navigateToHomeScreen() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_welcome_Screen_Fragment_to_homeScreenFragment);
     }
-    private void reload() { }
 }

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meals;
+import com.example.foodplanner.models.RemoteMeals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 public class HomeRandomMealsAdapter extends RecyclerView.Adapter<HomeRandomMealsAdapter.HomeRandomMealsHolder> {
 
 private Context context;
-private List<Meals> mealsList;
+private List<RemoteMeals> mealsList;
 private HomeClickListener homeClickListener;
 
     public HomeRandomMealsAdapter(Context context,HomeClickListener homeClickListener) {
@@ -43,7 +44,7 @@ private HomeClickListener homeClickListener;
 
     @Override
     public void onBindViewHolder(@NonNull HomeRandomMealsHolder holder, int position) {
-        Meals meals = mealsList.get(position);
+        RemoteMeals meals = mealsList.get(position);
         holder.name.setText(meals.getName());
 //        holder.category.setText(meals.getCategory());
 //        holder.area.setText(meals.getArea());
@@ -52,15 +53,16 @@ private HomeClickListener homeClickListener;
 //        holder.Measure.setText(meals.getMeasure1());
         Glide.with(context).load(meals.getMealImage()).into(holder.mealImage);
 
-//        holder.btn_Guest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                homeClickListener.addMealToHomeAdapter(meals);
-//            }
-//        });
+        holder.convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                homeClickListener.navigateToDetails(meals.getId());
+            }
+        });
     }
 
-    public void setMealsList(List<Meals> mealsList){
+    public void setMealsList(List<RemoteMeals> mealsList){
         this.mealsList.clear();
         this.mealsList.addAll(mealsList);
     }
@@ -83,7 +85,7 @@ private HomeClickListener homeClickListener;
 
         public HomeRandomMealsHolder(@NonNull View view){
             super(view);
-            convertView = (ConstraintLayout) view;
+            convertView = view.findViewById(R.id.constraintLayoutHome);
             name = view.findViewById(R.id.name_Meal);
 //            category = view.findViewById(R.id.);
 //            area = view.findViewById(R.id.area_Meal);

@@ -38,15 +38,18 @@ public class FoodPlannerActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-              if( navDestination.getId() == R.id.login_Fragment || navDestination.getId() == R.id.welcome_Screen_Fragment|| navDestination.getId() == R.id.signUp_Fragment){
+              if(navDestination.getId() == R.id.homeScreenFragment || navDestination.getId() == R.id.favoriteFragment || navDestination.getId() == R.id.calendarFragment || navDestination.getId() == R.id.profileFragment || navDestination.getId() == R.id.searchSelectbyScreenFragment){
 
-                  bottomNavigationView.setVisibility(View.INVISIBLE);
-              }else{
                   bottomNavigationView.setVisibility(View.VISIBLE);
+
+              }else{
+                  bottomNavigationView.setVisibility(View.INVISIBLE);
               }
 
             }
         });
+
+
 
     }
 }

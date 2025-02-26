@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.gms.play.services.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
@@ -71,5 +72,7 @@ dependencies {
     implementation (libs.rxjava3.retrofit.adapter)
     implementation("androidx.room:room-rxjava3:2.6.1")
 
+    //Youtube
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
 
 }

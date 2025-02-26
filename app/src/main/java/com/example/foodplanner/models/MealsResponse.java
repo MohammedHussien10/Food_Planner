@@ -1,16 +1,18 @@
 package com.example.foodplanner.models;
 
+import com.example.foodplanner.R;
+
 import java.util.List;
 
 public class MealsResponse {
-    private List<Meals> meals;
+    private List<RemoteMeals> meals;
 
-    public MealsResponse(List<Meals> meals) {
+    public MealsResponse(List<RemoteMeals> meals) {
 
         this.meals = meals;
     }
 
-    public List<Meals> getMeals() {
+    public List<RemoteMeals> getMeals() {
 
         return meals;
     }
