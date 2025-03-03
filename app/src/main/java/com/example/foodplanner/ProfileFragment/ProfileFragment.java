@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.databinding.FragmentProfileBinding;
@@ -63,6 +64,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 mAuth.signOut();
                 navController.navigate(R.id.action_profileFragment_to_welcome_Screen_Fragment);
+                Toast.makeText(requireContext(), "you logged out", Toast.LENGTH_SHORT).show();
             }
         });
     }

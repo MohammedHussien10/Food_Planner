@@ -144,5 +144,4 @@ CardView cardViewRandom;
 
 
 
-
 }

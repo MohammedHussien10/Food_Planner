@@ -79,8 +79,8 @@ class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
     public FavoriteViewHolder(@NonNull View itemView) {
         super(itemView);
-        mealFavoriteImage = itemView.findViewById(R.id.imgFavouriteMeal);
-        mealFavoriteName = itemView.findViewById(R.id.nameFavouriteMeal);
+        mealFavoriteImage = itemView.findViewById(R.id.imageView_Meal);
+        mealFavoriteName = itemView.findViewById(R.id.name_Meal);
 
         deleteMeal = itemView.findViewById(R.id.btn_delete);
         cardviewFavo = itemView.findViewById(R.id.cardviewFavo_cal);

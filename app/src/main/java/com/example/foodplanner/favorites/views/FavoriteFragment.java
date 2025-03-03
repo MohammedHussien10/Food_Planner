@@ -3,6 +3,7 @@ package com.example.foodplanner.favorites.views;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     FavoritesPresenter presenter;
     FavoriteAdapter adapter;
     FirebaseAuth mAuth;
+    MenuItem menuItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +57,12 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-        if (isGuest()) {
-            showGuestAlert();
-        }
+        menuItem = view.findViewById(R.id.favoriteFragment);
+
+//        mAuth = FirebaseAuth.getInstance();
+//        if (isGuest()) {
+//            showGuestAlert();
+//        }
         recyclerView = view.findViewById(R.id.calendar_rv);
         adapter = new FavoriteAdapter(getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
@@ -89,27 +93,12 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
         Navigation.findNavController(requireView()).navigate(R.id.action_favoriteFragment_to_detailsScreenFragment, bundle);
     }
 
-    public boolean isGuest() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        return user == null;
-    }
+//    public boolean isGuest() {
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        return user == null;
+//    }
 
 
-    private void showGuestAlert() {
-        NavController navController = Navigation.findNavController(requireView());
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("You need to register to use  Favourites Screen");
-        builder.setTitle("SignUp Or Login First!");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ok", (dialog, which) -> {
-            navController.navigate(R.id.action_favoriteFragment_to_welcome_Screen_Fragment);
-        });
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
-            dialog.cancel();
-            navController.navigate(R.id.action_favoriteFragment_to_homeScreenFragment);
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
+
 
 }

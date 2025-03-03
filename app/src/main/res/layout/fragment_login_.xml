@@ -87,8 +87,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_Screen_Login_Yourname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:layout_height="59dp"
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -106,9 +106,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_Screen_Login_Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:inputType="textPassword"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
