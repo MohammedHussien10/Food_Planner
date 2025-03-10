@@ -1,5 +1,6 @@
 package com.example.foodplanner.homescreenfragment.presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.foodplanner.models.Meals;
@@ -27,8 +28,8 @@ public class HomePresenter {
     }
 
 
-    public void showDailyMeals() {
-        disposable =     repository.getDailyMeals()
+    public void showDailyMeals(Context context) {
+        disposable = repository.getDailyMeals(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meal -> {
@@ -43,8 +44,8 @@ public class HomePresenter {
                 });
     }
 
-    public void getRandomMeals() {
-        disposable =       repository.getRandomMeals()
+    public void getRandomMeals(Context context) {
+        disposable = repository.getRandomMeals(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meal -> {
@@ -62,8 +63,6 @@ public class HomePresenter {
     public RemoteMeals getDailyRandomMeal() {
         return randomMeal;
     }
-
-
 
 
 }

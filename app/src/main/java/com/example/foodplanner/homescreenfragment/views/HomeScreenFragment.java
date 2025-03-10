@@ -2,10 +2,12 @@ package com.example.foodplanner.homescreenfragment.views;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,17 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.CheckNetworkingFragment.CheckNetwokingFragment;
 import com.example.foodplanner.databinding.FragmentHomeScreenBinding;
 import com.example.foodplanner.db.MealsLocalDataSource;
+import com.example.foodplanner.foodplanneractivtiy.FoodPlannerActivity;
 import com.example.foodplanner.homescreenfragment.presenter.HomeContract;
 import com.example.foodplanner.homescreenfragment.presenter.HomePresenter;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.RemoteMeals;
+import com.example.foodplanner.network.CheckNetworking;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,17 +37,25 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class HomeScreenFragment extends Fragment implements HomeClickListener, HomeContract {
-FragmentHomeScreenBinding binding;
-HomeRandomMealsAdapter homeRandomMealsAdapter;
-RecyclerView recyclerV_Meals;
-HomePresenter homePresenter;
-CardView cardViewRandom;
+    FragmentHomeScreenBinding binding;
+    HomeRandomMealsAdapter homeRandomMealsAdapter;
+    RecyclerView recyclerV_Meals;
+    HomePresenter homePresenter;
+    CardView cardViewRandom;
+    ImageView back;
     FirebaseUser user;
+    private CompositeDisposable disposables = new CompositeDisposable();
+
+
     public HomeScreenFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -53,17 +67,25 @@ CardView cardViewRandom;
 
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeScreenBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        NavController navController = Navigation.findNavController(requireView());
+        disposables.add(CheckNetworking.getNetworkStatus(requireContext())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(isConnected -> handleNetworkChange(isConnected, navController)));
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -73,16 +95,15 @@ CardView cardViewRandom;
             showToast("Guest Mode");
         }
 
-
-        cardViewRandom =view.findViewById(R.id.cardViewRandom);
+        back = view.findViewById(R.id.back);
+        cardViewRandom = view.findViewById(R.id.cardViewRandom);
         recyclerV_Meals = view.findViewById(R.id.recyclerV_Meal);
 
-        homeRandomMealsAdapter = new HomeRandomMealsAdapter(getContext(),this);
-        recyclerV_Meals.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        homeRandomMealsAdapter = new HomeRandomMealsAdapter(getContext(), this);
+        recyclerV_Meals.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerV_Meals.setAdapter(homeRandomMealsAdapter);
-        homePresenter.showDailyMeals();
-        homePresenter.getRandomMeals();
-
+        homePresenter.showDailyMeals(getContext());
+        homePresenter.getRandomMeals(getContext());
 
 
         cardViewRandom.setOnClickListener(new View.OnClickListener() {
@@ -98,15 +119,21 @@ CardView cardViewRandom;
         });
 
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.navigate(R.id.welcome_Screen_Fragment);
+            }
+        });
+
+
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
-
-
 
 
     @Override
@@ -125,12 +152,12 @@ CardView cardViewRandom;
 
     @Override
     public void showToast(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void addMealToHomeAdapter(Meals meal) {
-       // homePresenter.addProductToFavorites(meal);
+        // homePresenter.addProductToFavorites(meal);
         showToast("The Day of The Meal");
     }
 
@@ -142,6 +169,25 @@ CardView cardViewRandom;
         Navigation.findNavController(requireView()).navigate(R.id.action_homeScreenFragment_to_detailsScreenFragment, bundle);
     }
 
+    private void handleNetworkChange(boolean isConnected, NavController navController) {
+        if (!isConnected) {
 
+            if (navController.getCurrentDestination() != null && navController.getCurrentDestination().getId() == R.id.homeScreenFragment) {
+                navController.navigate(R.id.action_homeScreenFragment_to_checkNetwokingFragment);
+            }
+
+        } else {
+
+            if (navController.getCurrentDestination() != null && navController.getCurrentDestination().getId() == R.id.checkNetwokingFragment) {
+                navController.navigate(R.id.action_checkNetwokingFragment_to_homeScreenFragment2);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        disposables.clear();
+    }
 
 }

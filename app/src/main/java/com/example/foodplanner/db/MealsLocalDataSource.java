@@ -65,4 +65,8 @@ public class MealsLocalDataSource {
         return  mealsDao.addCalendarPlanMeals(meal).subscribeOn(Schedulers.io());
 
     }
+
+    public Flowable<List<CalendarPlan>> getAllCalendarMeals() {
+        return mealsDao.getAllCalendarMeals(); // ✅ استرجاع كل الوجبات بدون فلترة بالتاريخ
+    }
 }

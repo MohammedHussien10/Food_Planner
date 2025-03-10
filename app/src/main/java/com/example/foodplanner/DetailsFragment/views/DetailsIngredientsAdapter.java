@@ -37,7 +37,7 @@ private DetailsClickListener detailsClickListener;
     @Override
     public DetailsIngredientsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater  = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.details_ingredients_items,parent,false);
+        View view = inflater.inflate(R.layout.searchbyitem,parent,false);
         return new DetailsIngredientsHolder(view);
     }
 
@@ -84,13 +84,13 @@ private DetailsClickListener detailsClickListener;
 
         public DetailsIngredientsHolder(@NonNull View view){
             super(view);
-            name = view.findViewById(R.id.item_ingredients_name);
+            name = view.findViewById(R.id.item_searchName);
 //            category = view.findViewById(R.id.);
 //            area = view.findViewById(R.id.area_Meal);
 //            instructions = view.findViewById(R.id.instructions_Meal);
 //            ingredient = view.findViewById(R.id.ingredient_Meal);
 //            Measure = view.findViewById(R.id.measure_Meal);
-              mealImage = view.findViewById(R.id.item_ingredients_image);
+              mealImage = view.findViewById(R.id.item_searchImage);
 
           }
     }

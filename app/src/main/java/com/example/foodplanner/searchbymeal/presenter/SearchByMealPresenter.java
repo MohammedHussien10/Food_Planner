@@ -1,5 +1,6 @@
 package com.example.foodplanner.searchbymeal.presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.foodplanner.models.Meals;
@@ -25,8 +26,8 @@ public class SearchByMealPresenter {
     }
 
 
-    public void getSelectedCategory(String categoryName) {
-        disposable =   repository.getSelectedCategories(categoryName)
+    public void getSelectedCategory(String categoryName,Context context) {
+        disposable =   repository.getSelectedCategories(categoryName,context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -45,8 +46,8 @@ public class SearchByMealPresenter {
 
     }
 
-    public void getSelectedIngredient(String ingredientName) {
-        disposable =   repository.getSelectedIngredient(ingredientName)
+    public void getSelectedIngredient(String ingredientName, Context context) {
+        disposable =   repository.getSelectedIngredient(ingredientName,context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
@@ -63,8 +64,8 @@ public class SearchByMealPresenter {
                 });
     }
 
-    public void getSelectedArea(String areaName) {
-        disposable = repository.getSelectedArea(areaName)
+    public void getSelectedArea(String areaName,Context context) {
+        disposable = repository.getSelectedArea(areaName,context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

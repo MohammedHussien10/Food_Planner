@@ -1,6 +1,7 @@
 package com.example.foodplanner.calendar.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarHolder>{
     }
 
     public void setList(List<CalendarPlan> mealsList){
+        Log.d("ADAPTER", "Updating RecyclerView with " + mealsCalenderPlan.size() + " meals");
         mealsCalenderPlan.clear();
         mealsCalenderPlan.addAll(mealsList);
     }

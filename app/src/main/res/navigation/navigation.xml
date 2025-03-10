@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_detailsScreenFragment"
             app:destination="@id/detailsScreenFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_checkNetwokingFragment"
+            app:destination="@id/checkNetwokingFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsScreenFragment"
@@ -140,5 +143,14 @@
         <action
             android:id="@+id/action_searchByMealFragment_to_detailsScreenFragment"
             app:destination="@id/detailsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkNetwokingFragment"
+        android:name="com.example.foodplanner.CheckNetworkingFragment.CheckNetwokingFragment"
+        android:label="fragment_check_netwoking"
+        tools:layout="@layout/fragment_check_netwoking" >
+        <action
+            android:id="@+id/action_checkNetwokingFragment_to_homeScreenFragment2"
+            app:destination="@id/homeScreenFragment" />
     </fragment>
 </navigation>

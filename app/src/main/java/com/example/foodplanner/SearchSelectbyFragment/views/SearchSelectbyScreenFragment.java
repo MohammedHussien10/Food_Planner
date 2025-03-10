@@ -64,9 +64,9 @@ public class SearchSelectbyScreenFragment extends Fragment implements SearchSele
         chipGroup = view.findViewById(R.id.chipitems);
         earchbyitem = view.findViewById(R.id.et_searchbymeal);
         recyclerV_Selected_items = view.findViewById(R.id.searchbymeal_Rv);
-        searchSelectbyPresenter.getCategory();
-        searchSelectbyPresenter.getIngredient();
-        searchSelectbyPresenter.getArea();
+        searchSelectbyPresenter.getCategory(getContext());
+        searchSelectbyPresenter.getIngredient(getContext());
+        searchSelectbyPresenter.getArea(getContext());
         searchSelectbyCategoryAdapter = new SearchSelectbyCategoryAdapter(getContext(), this);
         searchSelectbyIngredientAdapter = new SearchSelectbyIngredientAdapter(getContext(), this);
         searchSelectbyAreaAdapter = new SearchSelectbyAreaAdapter(getContext(), this);

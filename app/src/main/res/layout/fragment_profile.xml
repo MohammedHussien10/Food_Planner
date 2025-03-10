@@ -9,20 +9,22 @@
         android:id="@+id/btn_profile_logout"
         android:layout_width="129dp"
         android:layout_height="54dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="84dp"
         android:text="@string/Logout"
         app:layout_constraintEnd_toEndOf="@+id/btn_profile_plans"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_profile_plans"
         app:layout_constraintTop_toBottomOf="@+id/btn_profile_plans" />
+
 
     <Button
         android:id="@+id/btn_profile_plans"
         android:layout_width="129dp"
         android:layout_height="54dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
         android:text="@string/Plans"
         app:layout_constraintEnd_toEndOf="@+id/btn_profile_favo"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_profile_favo"
         app:layout_constraintTop_toBottomOf="@+id/btn_profile_favo" />
 
@@ -30,9 +32,10 @@
         android:id="@+id/btn_profile_favo"
         android:layout_width="129dp"
         android:layout_height="54dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="164dp"
         android:text="@string/Favourites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

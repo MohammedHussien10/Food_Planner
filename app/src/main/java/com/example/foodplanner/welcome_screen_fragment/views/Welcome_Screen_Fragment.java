@@ -45,11 +45,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract {
-     FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     WelcomeScreenFragmentBinding binding;
-     GoogleSignInClient googleSignInClient;
-     ActivityResultLauncher<Intent> googleSignInLauncher;
-     WelcomePresenter welcomePresenter;
+    GoogleSignInClient googleSignInClient;
+    ActivityResultLauncher<Intent> googleSignInLauncher;
+    WelcomePresenter welcomePresenter;
 
 
     public Welcome_Screen_Fragment() {
@@ -60,7 +60,7 @@ public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        welcomePresenter = new WelcomePresenter(this,requireContext());
+        welcomePresenter = new WelcomePresenter(this, requireContext());
     }
 
     @Override
@@ -104,15 +104,18 @@ public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract
         );
 
 
-
-
-        binding.btnWelcomeLogin.setOnClickListener(v ->
-                navController.navigate(R.id.action_welcome_Screen_Fragment_to_login_Fragment)
-        );
+        binding.btnWelcomeLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.popBackStack(R.id.searchSelectbyScreenFragment, true);
+                navController.navigate(R.id.action_welcome_Screen_Fragment_to_login_Fragment);
+            }
+        });
 
         binding.btnWelcomeSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                navController.popBackStack(R.id.searchSelectbyScreenFragment, true);
                 Navigation.findNavController(requireView()).navigate(R.id.action_welcome_Screen_Fragment_to_signUp_Fragment);
             }
         });
@@ -120,7 +123,9 @@ public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract
         binding.btnGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(requireView()).navigate(R.id.action_welcome_Screen_Fragment_to_homeScreenFragment);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerView);
+                navController.popBackStack(R.id.searchSelectbyScreenFragment, true);
+                navController.navigate(R.id.homeScreenFragment);
             }
         });
 
@@ -134,7 +139,6 @@ public class Welcome_Screen_Fragment extends Fragment implements WelcomeContract
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
 
 
     private void signInWithGoogle() {

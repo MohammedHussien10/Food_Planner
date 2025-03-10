@@ -32,4 +32,7 @@ public interface MealsDao {
 
     @Delete
     Completable deleteCalendarPlanMeals(CalendarPlan meal);
+
+    @Query("SELECT * FROM calendarplan") // ✅ استرجاع كل البيانات بدون شرط التاريخ
+    Flowable<List<CalendarPlan>> getAllCalendarMeals();
 }

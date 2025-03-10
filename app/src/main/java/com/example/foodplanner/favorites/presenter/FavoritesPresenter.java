@@ -2,6 +2,7 @@ package com.example.foodplanner.favorites.presenter;
 
 import android.util.Log;
 
+import com.example.foodplanner.models.CalendarPlan;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
 
@@ -39,6 +40,16 @@ public class FavoritesPresenter {
 
                 });
     }
+
+    public void backupUserData(String userId) {
+        repository.backupCalendarDataToFirestore(userId);
+    }
+
+    public void restoreUserData(String userId) {
+        repository.restoreDataFromFirestore(userId);
+    }
+
+
 
 
 }

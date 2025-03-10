@@ -106,7 +106,7 @@ public class SearchByMealFragment extends Fragment implements SearchByMealClickL
         if (getArguments() != null) {
             String itemName  = getArguments().getString("categoryName");
             if (itemName != null) {
-                searchByMealPresenter.getSelectedCategory(itemName);
+                searchByMealPresenter.getSelectedCategory(itemName,getContext());
             }
 
         }
@@ -118,7 +118,7 @@ public class SearchByMealFragment extends Fragment implements SearchByMealClickL
         if (getArguments() != null) {
             String itemName = getArguments().getString("areaName");
             if (itemName != null) {
-                searchByMealPresenter.getSelectedArea(itemName);
+                searchByMealPresenter.getSelectedArea(itemName,getContext());
             }
         }
     }
@@ -128,7 +128,7 @@ public class SearchByMealFragment extends Fragment implements SearchByMealClickL
         if (getArguments() != null) {
             String itemName = getArguments().getString("ingredientName");
             if (itemName != null) {
-                searchByMealPresenter.getSelectedIngredient(itemName);
+                searchByMealPresenter.getSelectedIngredient(itemName,getContext());
             }
         }
     }

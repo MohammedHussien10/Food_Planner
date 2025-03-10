@@ -1,6 +1,7 @@
 package com.example.foodplanner.SearchSelectbyFragment.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.foodplanner.models.Area;
 import com.example.foodplanner.models.Categories;
 import com.example.foodplanner.models.Ingredients;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +49,14 @@ public class SearchSelectbyAreaAdapter extends RecyclerView.Adapter<SearchSelect
     public void onBindViewHolder(@NonNull AreaHolder holder, int position) {
         Area area = areaList.get(position);
         holder.areaName.setText(area.getStrArea());
-        String imageName = area.getStrArea().toLowerCase();
+        String imageName = area.getStrArea().toLowerCase().replace(" ", "_");
         int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
-
+        if (imageResId != 0) {
+            holder.areaImage.setImageResource(imageResId);
+        } else {
+          Log.i("image","no image");
+        }
 
         holder.selectedCard.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -146,7 +146,7 @@ public class DetailsScreenFragment extends Fragment implements DetailsClickListe
         if (getArguments() != null) {
             String mealId = getArguments().getString("mealId");
             if (mealId != null) {
-                detailsPresenter.getSelectedMeal(mealId);
+                detailsPresenter.getSelectedMeal(mealId,getContext());
             }
         }
     }

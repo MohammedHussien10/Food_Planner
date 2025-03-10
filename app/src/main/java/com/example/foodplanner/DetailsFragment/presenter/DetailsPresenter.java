@@ -1,5 +1,6 @@
 package com.example.foodplanner.DetailsFragment.presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.foodplanner.models.CalendarPlan;
@@ -32,8 +33,8 @@ public class DetailsPresenter {
     }
 
 
-    public void getSelectedMeal(String mealId) {
-        disposable =  repository.getSelectedMeal(mealId)
+    public void getSelectedMeal(String mealId, Context context) {
+        disposable =  repository.getSelectedMeal(mealId,context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

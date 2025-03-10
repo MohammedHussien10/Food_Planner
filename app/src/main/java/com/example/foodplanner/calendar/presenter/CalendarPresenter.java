@@ -5,6 +5,9 @@ import android.util.Log;
 import com.example.foodplanner.models.CalendarPlan;
 import com.example.foodplanner.models.Meals;
 import com.example.foodplanner.models.MealsRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -14,6 +17,8 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CalendarPresenter {
+    FirebaseFirestore firebaseFirestore;
+    FirebaseUser user;
     public MealsRepository repository;
     public Observable<List<Meals>> favoriteList;
     public CalendarContract contract;
@@ -22,15 +27,22 @@ public class CalendarPresenter {
     public CalendarPresenter(MealsRepository repository , CalendarContract contract){
         this.repository = repository;
         this.contract = contract;
+        firebaseFirestore =  FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public void getCalendarPlanMeals(String date){
-        disposable = repository.getCalendarPlanMeals(date).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                meals -> {contract.getCalendarPlanMeals(meals);
-                    Log.i("test","good" +meals.size());
-                }
-
-        );
+        Log.d("PRESENTER", "Fetching meals for date: " + date);
+        disposable = repository.getCalendarPlanMeals(date)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meals -> {
+                            contract.getCalendarPlanMeals(meals);
+                            Log.i("PRESENTER", "Fetched " + meals.size() + " meals from DB");
+                        },
+                        error -> Log.e("PRESENTER", "Error fetching meals", error)
+                );
     }
 
     public void removeCalendarPlanMeals(CalendarPlan meal){
@@ -38,6 +50,14 @@ public class CalendarPresenter {
                 .subscribe(()->{
 
                 });
+    }
+
+    public void backupUserData(String userId) {
+        repository.backupCalendarDataToFirestore(userId);
+    }
+
+    public void restoreUserData(String userId) {
+        repository.restoreDataFromFirestore(userId);
     }
 
 

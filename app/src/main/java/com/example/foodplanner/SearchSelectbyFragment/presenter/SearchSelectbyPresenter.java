@@ -1,5 +1,7 @@
 package com.example.foodplanner.SearchSelectbyFragment.presenter;
 
+import android.content.Context;
+
 import com.example.foodplanner.models.MealsRepository;
 import com.example.foodplanner.models.RemoteMeals;
 
@@ -15,6 +17,7 @@ public class SearchSelectbyPresenter {
     MealsRepository repository;
 
     Disposable disposable;
+
     public SearchSelectbyPresenter(SearchSelectbyContract searchSelectbyContract, MealsRepository repository) {
 
         this.searchSelectbyContract = searchSelectbyContract;
@@ -23,13 +26,13 @@ public class SearchSelectbyPresenter {
     }
 
 
-    public void getCategory() {
-        disposable=   repository.getCategory()
+    public void getCategory(Context context) {
+        disposable = repository.getCategory(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(category -> {
                     if (category != null) {
-                       searchSelectbyContract.assignCategoryAdapter(category.getCategories());
+                        searchSelectbyContract.assignCategoryAdapter(category.getCategories());
                     } else {
                         searchSelectbyContract.showToast("Meal data is empty");
                     }
@@ -38,8 +41,8 @@ public class SearchSelectbyPresenter {
                 });
     }
 
-    public void getIngredient() {
-        disposable =    repository.getIngredient()
+    public void getIngredient(Context context) {
+        disposable = repository.getIngredient(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ingredient -> {
@@ -54,8 +57,8 @@ public class SearchSelectbyPresenter {
                 });
     }
 
-    public void getArea() {
-        repository.getArea()
+    public void getArea(Context context) {
+        repository.getArea(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(area -> {
@@ -69,8 +72,6 @@ public class SearchSelectbyPresenter {
                     searchSelectbyContract.showToast("Error fetching meal: " + throwable.getMessage());
                 });
     }
-
-
 
 
 }

@@ -1,5 +1,8 @@
 package com.example.foodplanner.favorites.views;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.MealsLocalDataSource;
 import com.example.foodplanner.favorites.presenter.FavoritesContract;
@@ -35,6 +39,7 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     FavoriteAdapter adapter;
     FirebaseAuth mAuth;
     MenuItem menuItem;
+    LottieAnimationView lottieAnimationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,10 +63,10 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         menuItem = view.findViewById(R.id.favoriteFragment);
-
-//        mAuth = FirebaseAuth.getInstance();
+        lottieAnimationView = view.findViewById(R.id.loading_favo);
+        mAuth = FirebaseAuth.getInstance();
 //        if (isGuest()) {
-//            showGuestAlert();
+//            Toast.makeText(requireContext(),"you can't go to favorites",Toast.LENGTH_SHORT).show();
 //        }
         recyclerView = view.findViewById(R.id.calendar_rv);
         adapter = new FavoriteAdapter(getContext(),this);
@@ -75,16 +80,19 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
     @Override
     public void removeMealFromFavourite(Meals Meal) {
         presenter.removeFavoritesMeals(Meal);
-        Toast.makeText(requireContext(),"meal removed from favorites",Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Meal removed from favorites", Toast.LENGTH_SHORT).show();
+        presenter.getFavoritesMeals();  // إعادة تحميل البيانات بعد الحذف
     }
+
 
 
     @Override
     public void getFavoriteMeals(List<Meals> MealstList) {
         adapter.setList(MealstList);
         adapter.notifyDataSetChanged();
-
+        checkMeals(MealstList);
     }
+
 
     @Override
     public void navigateToDetails(String mealId) {
@@ -93,12 +101,50 @@ public class FavoriteFragment extends Fragment implements OnFavoriteClickListene
         Navigation.findNavController(requireView()).navigate(R.id.action_favoriteFragment_to_detailsScreenFragment, bundle);
     }
 
-//    public boolean isGuest() {
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        return user == null;
+
+
+    public boolean isGuest() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        return user == null;
+    }
+
+//    private void showGuestAlert() {
+//      NavController navController = Navigation.findNavController(requireView());
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setMessage("You need to register to use  Favourites Screen");
+//        builder.setTitle("SignUp Or Login First!");
+//        builder.setCancelable(false);
+//        builder.setPositiveButton("Ok", (dialog, which) -> {
+//            navController.navigate(R.id.welcome_Screen_Fragment);
+//        });
+//        builder.setNegativeButton("Cancel", (dialog, which) -> {
+//            dialog.cancel();
+//            navController.navigate(R.id.homeScreenFragment);
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
 //    }
 
 
+    public void hideLottie(){
+        lottieAnimationView.setVisibility(GONE);
+
+    }
+
+    public void showLottie(){
+        lottieAnimationView.setVisibility(VISIBLE);
+
+    }
+
+    private void checkMeals(List<Meals> mealsList) {
+        if (mealsList.isEmpty()) {
+            showLottie();
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            hideLottie();
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
 
 
 }

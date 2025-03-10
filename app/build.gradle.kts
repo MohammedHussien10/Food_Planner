@@ -47,6 +47,11 @@ dependencies {
     //firebase
     implementation(libs.firebase.auth)
     implementation (libs.firebase.ui.auth)
+
+    //firebase storage
+    implementation (libs.firebase.firestore)
+    implementation (libs.gson)
+
    // implementation(libs.play.services.auth)
     //retrofit
     implementation(libs.retrofit)

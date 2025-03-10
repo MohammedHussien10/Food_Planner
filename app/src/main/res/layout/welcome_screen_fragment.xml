@@ -64,7 +64,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/button_background_welcome"
         android:text="@string/twitter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,10 +75,12 @@
         android:id="@+id/btnWelcomeLogin"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/button_background_welcome_2"
         android:text="@string/Login"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Welcome_SignUp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_Guest" />
 
@@ -95,7 +97,7 @@
         android:text="Login with Google"
         android:textColor="#497D9D"
         app:layout_constraintEnd_toEndOf="@+id/btn_Welcome_SignUp"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="@+id/btnWelcomeLogin"
         app:layout_constraintTop_toBottomOf="@+id/btn_Welcome_SignUp" />
 
